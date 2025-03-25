@@ -1,25 +1,25 @@
 'use client'
-import { useRef, useEffect, useState  } from 'react';
-import { useWindowListener } from '@/hooks/useWindowListner';
+import { useRef, useEffect } from 'react';
 
-export function VlogPlayer({vdoSrc, isPlaying} : {vdoSrc:string, isPlaying:boolean}) {
-
+export function VlogPlayer({ vdoSrc, isPlaying }: { vdoSrc: string, isPlaying: boolean }) {
     const vdoRef = useRef<HTMLVideoElement>(null);
 
-    useEffect(()=> {
-        //alert('width is' + vdoRef.current?.videoWidth);
-        if(isPlaying) {
-            //alert('Play VDO')
+    useEffect(() => {
+        if (isPlaying) {
             vdoRef.current?.play();
         } else {
-            //alert('Pause VDO')
             vdoRef.current?.pause();
         }
-    }, [isPlaying])
-
-    useWindowListener("resize", (e)=>{ alert('Window Width is ' + (e.target as Window).innerWidth)});
+    }, [isPlaying]);
 
     return (
-        <video className="w-[40%]" src={vdoSrc} ref={vdoRef} controls loop muted/>
+        <video 
+            className="absolute top-0 left-0 w-full h-full object-cover z-[-1]" 
+            src={vdoSrc} 
+            ref={vdoRef} 
+            controls 
+            loop 
+            muted 
+        />
     );
 }

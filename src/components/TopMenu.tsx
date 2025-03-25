@@ -3,7 +3,7 @@ import Image from 'next/image';
 import TopMenuItem from './TopMenuItem';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import Link from 'next/link'; // Correcting Link import for Next.js
+import Link from 'next/link'; 
 
 export default async function TopMenu() {
     const session = await getServerSession(authOptions);
@@ -15,16 +15,13 @@ export default async function TopMenu() {
                     src='/img/logo.png'
                     className={styles.logoimg}
                     alt='logo'
-                    width={0}
-                    height={0}
-                    sizes='100vh'
+                    width={150}
+                    height={50}
+                    sizes='100vw'
                 />
             </Link>
 
             <TopMenuItem title='Booking' pageRef='/booking' />
-
-           
-
             <TopMenuItem title='My Booking' pageRef='/mybooking' />
             <TopMenuItem title='Provider' pageRef='/provider' />
             {session?.user?.role === 'admin' && (
@@ -32,17 +29,17 @@ export default async function TopMenu() {
             )}
             {session ? (
                 <Link href="/api/auth/signout">
-                    <div className='flex items-center absolute right-0 h-full px-2 text-cyan-600 text-sm'>
+                    <div className={styles.signedInText}>
                         Sign-Out of {session.user?.name}
                         {session.user?.role === 'admin' && (
-                            <span className="ml-1 text-gold font-semibold">(Admin)</span>
+                            <span className={styles.adminRole}>(Admin)</span>
                         )}
                     </div>
                 </Link>
             ) : (
-                <div className="absolute right-0 flex items-center h-full px-2 space-x-4 text-sm">
-                    <Link href="/api/auth/signin" className="text-cyan-600">Sign-In</Link>
-                    <Link href="/register" className="text-green-500 font-semibold">Register</Link>
+                <div className={styles.signinRegister}>
+                    <Link href="/api/auth/signin" className={styles.signinLink}>Sign-In</Link>
+                    <Link href="/register" className={styles.registerLink}>Register</Link>
                 </div>
             )}
         </div>
