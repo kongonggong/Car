@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import styles from "./Booko.module.css";  // Import the CSS module
 
 interface Car {
   _id: string;
@@ -88,13 +89,6 @@ export default function Booko({ token }: { token: string }) {
       return;
     }
 
-    console.log({
-      carModel,
-      pickupDate: formatDate(pickupDate),
-      returnDate: formatDate(returnDate),
-      providerId
-    });
-
     try {
       const response = await fetch("https://back-end-car.vercel.app/api/bookings", {
         method: "POST",
@@ -111,7 +105,6 @@ export default function Booko({ token }: { token: string }) {
       });
 
       const result = await response.json();
-      console.log("Booking result:", result);
 
       if (!response.ok) {
         setBookingStatus(result.message || "Failed to complete booking.");
@@ -132,13 +125,18 @@ export default function Booko({ token }: { token: string }) {
   };
 
   return (
-    <main className="w-[100%] flex flex-col items-center space-y-4">
-      <div className="text-xl font-medium">New Reservation</div>
+    <main className={styles.container}>
+      <div className={styles.header}>New Reservation</div>
 
-      <div className="w-fit space-y-2">
-        <div>
-          <label className="block text-gray-600">Car Model</label>
-          <select name="model" value={carModel} onChange={handleChange} className="px-4 py-2 border rounded">
+      <div className={styles.formGroup}>
+        <div className={styles.formField}>
+          <label className={styles.label}>Car Model</label>
+          <select
+            name="model"
+            value={carModel}
+            onChange={handleChange}
+            className={styles.select}
+          >
             <option value="">All Models</option>
             {carModels.map((model) => (
               <option key={model} value={model}>
@@ -148,13 +146,13 @@ export default function Booko({ token }: { token: string }) {
           </select>
         </div>
 
-        <div>
-          <label className="block text-gray-600">Provider Name</label>
+        <div className={styles.formField}>
+          <label className={styles.label}>Provider Name</label>
           <select
             name="provider"
             value={providerId || ""}
             onChange={handleChange}
-            className="px-4 py-2 border rounded"
+            className={styles.select}
           >
             <option value="">All Providers</option>
             {providers.map((provider) => (
@@ -165,10 +163,10 @@ export default function Booko({ token }: { token: string }) {
           </select>
         </div>
 
-        <div>
-          <label className="block text-gray-600">Pick-Up Date</label>
+        <div className={styles.formField}>
+          <label className={styles.label}>Pick-Up Date</label>
           <input
-            className="border p-2 rounded"
+            className={styles.input}
             type="date"
             name="pickupDate"
             value={pickupDate}
@@ -176,10 +174,10 @@ export default function Booko({ token }: { token: string }) {
           />
         </div>
 
-        <div>
-          <label className="block text-gray-600">Return Date</label>
+        <div className={styles.formField}>
+          <label className={styles.label}>Return Date</label>
           <input
-            className="border p-2 rounded"
+            className={styles.input}
             type="date"
             name="returnDate"
             value={returnDate}
@@ -187,20 +185,20 @@ export default function Booko({ token }: { token: string }) {
           />
         </div>
 
-        {/* Display readable formatted dates */}
-        {pickupDate && <div>Pickup Date: {formatDate(pickupDate)}</div>}
-        {returnDate && <div>Return Date: {formatDate(returnDate)}</div>}
+        {pickupDate && (
+          <div className="text-gray-800 text-lg">Pickup Date: {formatDate(pickupDate)}</div>
+        )}
+        {returnDate && (
+          <div className="text-gray-800 text-lg">Return Date: {formatDate(returnDate)}</div>
+        )}
       </div>
 
-      <button
-        className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow"
-        onClick={handleBooking}
-      >
+      <button className={styles.button} onClick={handleBooking}>
         Check Car Availability & Book
       </button>
 
       {bookingStatus && (
-        <div className="mt-4 text-center text-xl">{bookingStatus}</div>
+        <div className={styles.bookingStatus}>{bookingStatus}</div>
       )}
     </main>
   );
