@@ -34,7 +34,7 @@ export default function AdminBookings({ token }: { token: string }) {
 
   async function fetchBookings() {
     try {
-      const response = await fetch("http://localhost:5003/api/admins/bookings", {
+      const response = await fetch("https://back-end-car.vercel.app/api/admins/bookings", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export default function AdminBookings({ token }: { token: string }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5003/api/admins/bookings/${editingBooking?._id}`, {
+      const response = await fetch(`https://back-end-car.vercel.app/api/admins/bookings/${editingBooking?._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

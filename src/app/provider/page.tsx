@@ -20,7 +20,7 @@ export default function ProviderPage() {
     async function fetchProviders() {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:5003/api/users/providers");
+            const response = await fetch("https://back-end-car.vercel.app/api/users/providers");
             if (!response.ok) throw new Error("Failed to fetch providers");
             const data: Provider[] = await response.json();
             setProviders(data);

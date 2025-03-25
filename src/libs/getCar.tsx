@@ -1,5 +1,5 @@
 export default async function getCar(id:string) {
-    const response = await fetch(`http://localhost:5003/api/cars/${id}`)
+    const response = await fetch(`https://back-end-car.vercel.app/api/cars/${id}`)
     if(!response.ok) {
         throw new Error("Failed to fetch cars")
     }

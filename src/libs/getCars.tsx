@@ -1,6 +1,6 @@
 export default async function getCars() {
     try {
-        const response = await fetch("http://localhost:5003/api/cars/search", {
+        const response = await fetch("https://back-end-car.vercel.app/api/cars/search", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

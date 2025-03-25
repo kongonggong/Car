@@ -36,7 +36,7 @@ export default function CarPage() {
     async function fetchCars() {
         setLoading(true);
         try {
-            let url = "http://localhost:5003/api/cars/search";
+            let url = "https://back-end-car.vercel.app/api/cars/search";
 
             const params = new URLSearchParams();
             if (searchParams.make) params.append("make", searchParams.make);

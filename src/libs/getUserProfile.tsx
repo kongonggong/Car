@@ -2,7 +2,7 @@ export default async function getUserProfile(token: string) {
     try {
         console.log("Fetching user profile..."); // Removed token from logs for security
 
-        const response = await fetch("http://localhost:5003/api/users/me", {
+        const response = await fetch("https://back-end-car.vercel.app/api/users/me", {
             method: "GET",
             headers: {
                 authorization: `Bearer ${token}`,

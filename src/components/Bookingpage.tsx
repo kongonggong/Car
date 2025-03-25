@@ -33,7 +33,7 @@ export default function Booko({ token }: { token: string }) {
 
   async function fetchCars() {
     try {
-      const response = await fetch("http://localhost:5003/api/cars/search?available=true");
+      const response = await fetch("https://back-end-car.vercel.app/api/cars/search?available=true");
       const data: Car[] = await response.json();
       setCarModels([...new Set(data.map((car) => car.model))]);
     } catch (error) {
@@ -43,7 +43,7 @@ export default function Booko({ token }: { token: string }) {
 
   async function fetchProviders() {
     try {
-      const response = await fetch("http://localhost:5003/api/users/providers");
+      const response = await fetch("https://back-end-car.vercel.app/api/users/providers");
       const data: Provider[] = await response.json();
       setProviders(data);
     } catch (error) {
@@ -96,7 +96,7 @@ export default function Booko({ token }: { token: string }) {
     });
 
     try {
-      const response = await fetch("http://localhost:5003/api/bookings", {
+      const response = await fetch("https://back-end-car.vercel.app/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
